@@ -1,0 +1,12 @@
+[Unit]
+Description=a pi api collector
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=__APP_DIR__/apps
+ExecStart=__APP_DIR__/apps/bin/python3 __APP_DIR__/apps/collect_data_from_rpis.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

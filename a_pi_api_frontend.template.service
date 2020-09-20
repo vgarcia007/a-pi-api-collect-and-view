@@ -1,0 +1,13 @@
+[Unit]
+Description=a pi api frontend
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=__APP_DIR__/apps
+Environment=FLASK_CONFIG=production
+ExecStart=__APP_DIR__/apps/bin/gunicorn -b 0.0.0.0:8888 -w 4 flask-frontend:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

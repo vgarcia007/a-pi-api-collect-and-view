@@ -19,6 +19,7 @@ mv a_pi_api_frontend.service /etc/systemd/system/a_pi_api_frontend.service
 #lets go
 systemctl daemon-reload
 systemctl start a_pi_api_frontend
+systemctl enable a_pi_api_frontend
 systemctl status a_pi_api_frontend
 
 #stop service in case its allready installed
@@ -29,6 +30,7 @@ mv a_pi_api_collector.service /etc/systemd/system/a_pi_api_collector.service
 #lets go
 systemctl daemon-reload
 systemctl start a_pi_api_collector
+systemctl enable a_pi_api_collector
 systemctl status a_pi_api_collector
 
 echo "you can reach the frontend at http://$(hostname):8888"

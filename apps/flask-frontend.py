@@ -40,6 +40,8 @@ def pi(pi):
 
     for device in devices:
         if device['name'] == pi:
+            
+            device_name= pi
 
             latest_data = {}
             pi_ip = device['ip']
@@ -85,7 +87,7 @@ def pi(pi):
     if len(pi_ip) == 0:
         return render_template('error.html', text='device not in list')
 
-    return render_template('pi.html', device_name=device['name'] ,data=latest_data)
+    return render_template('pi.html', device_name=device_name ,data=latest_data)
 
 if __name__ == '__main__':
 

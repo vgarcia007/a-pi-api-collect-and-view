@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<h2>DB Test</h2>
+<div class="row">
+  
+  <table class="table table-striped table-responsive" >
+  {% for item in data %}
+          <tr>
+              <td>{{ item[0] }}</td>
+              <td>{{ item[1] }}</td>
+              <td>{{ item[2] }}</td>
+              <td>{{ item[3] }}</td>
+              <td>{{ item[4] }}</td>
+          </tr>
+  {% endfor %}
+  </table>
+
+</div>
+
+{% endblock %}

@@ -7,33 +7,19 @@
 
 {% for item in api_data %}
 
-  <div class="col-md-4 col-xl-3">
+  <div class="col-md-4 col-xl-3 col-link">
+    <a href="/pi/{{ item.device.name }}">
     <div class="card bg-c-blue order-card">
         <div class="card-block">
-            <h3><a href="/pi/{{ item.device.name }}">{{ item.device.name }}</a></h3>
+            <h3>{{ item.device.name }}</h3>
             <p>{{ item.distribution }}<span class="f-right">{{ item.distribution_verson }}</span></p>
             <p>api version<span class="f-right">{{ item.api_Version }}</span></p>
             <p>mac<span class="f-right">{{ item.mac_address }}</span></p>
         </div>
     </div>
+    </a>
   </div>
 {% endfor %}
-</div>
-<h2>DB Test</h2>
-<div class="row">
-  
-  <table class="table table-striped table-responsive" >
-  {% for item in data %}
-          <tr>
-              <td>{{ item[0] }}</td>
-              <td>{{ item[1] }}</td>
-              <td>{{ item[2] }}</td>
-              <td>{{ item[3] }}</td>
-              <td>{{ item[4] }}</td>
-          </tr>
-  {% endfor %}
-  </table>
-
 </div>
 
 {% endblock %}

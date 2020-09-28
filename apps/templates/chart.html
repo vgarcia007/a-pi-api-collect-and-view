@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block content %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<h2>{{device_name}}</h2>
+<div class="row">
+
+    <div class="col-12">
+        <div id="container">
+            
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+$.getJSON("/chart/json/{{ pi }}/{{ sensor_name }}", function(json) {
+
+    console.log(json);
+
+});
+
+
+$(function () {
+                var fetchdata_json = new Array();   
+                $.getJSON('/chart/json/{{ pi }}/{{ sensor_name }}', function(data) {
+                    // Populate simple Languages
+                    for (i = 0; i < data.length; i++){
+                        fetchdata_json.push([data[i].key, data[i].value]);
+                    }
+                 
+                    // here simple bar draw chart
+                    $('#container').highcharts({
+                    chart: {
+                        type: "line"//type defination
+                    },
+                    title: {
+                        text: "Sensor data"
+                    },
+                    xAxis: {
+                        type: 'category',
+                        allowDecimals: false,
+                        title: {
+                            text: ""
+                        }
+                    },
+                    yAxis: {
+                        title: false
+                    },
+                    series: [{
+	                    name: "{{ sensor_name }}",
+                        data: fetchdata_json
+                    }]
+                }); 
+            });
+        });
+</script>
+{% endblock %}

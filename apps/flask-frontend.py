@@ -4,6 +4,7 @@ from common.devices import devices
 from common.functions import get_api, get_and_save_value_from_api, create_connection, script_dir, db_file
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime
+from dateutil import tz
 
 
 app = Flask(__name__, static_folder="static_files")
@@ -114,6 +115,9 @@ def chart(pi, sensor):
 @app.route('/chart/json/<pi>/<sensor>')
 def chart_json(pi, sensor):
 
+    from_zone = tz.tzutc()
+    to_zone = tz.tzlocal()
+
     conn = create_connection(db_file)
     conn.row_factory = sqlite3.Row
 
@@ -127,15 +131,19 @@ def chart_json(pi, sensor):
             info = get_api(device['ip'])
 
             c = conn.cursor()
-            sql = ''' SELECT data, recorded FROM records WHERE hostname = ? AND name = ? ORDER BY recorded DESC'''
+            sql = ''' SELECT data, recorded FROM records WHERE hostname = ? AND name = ? ORDER BY recorded ASC'''
             c.execute(sql, (info['hostname'], sensor_name))
             db_data = c.fetchall()
 
             
             for data in db_data:
+
+                timestamp = datetime.utcfromtimestamp(data[1])
+                timestamp = timestamp.replace(tzinfo=from_zone)
+                timestamp = timestamp.astimezone(to_zone)
                 item = {
                     'value': float(data[0]),
-                    'key':datetime.utcfromtimestamp(data[1]).strftime('%Y-%m-%d %H:%M:%S')
+                    'key':timestamp.strftime('%Y-%m-%d %H:%M:%S')
                     }
 
                 json.append(item)

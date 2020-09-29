@@ -1,6 +1,12 @@
 database.db
 devices.py
 .vscode
-.vscode/
-venv/
-venv
+apps/bin/
+apps/include/
+apps/common/__pycache__/
+apps/lib/
+apps/lib64
+apps/pyvenv.cfg
+apps/share/
+pyvenv.cfg
+*.pyc

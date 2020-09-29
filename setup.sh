@@ -1,4 +1,10 @@
 #!/bin/bash
+if [ -z "$1" ] 
+   then
+     setup_type="production"
+ else
+     setup_type="dev"
+ fi
 
 #get current directory
 current_working_dir=$(pwd)
@@ -15,7 +21,7 @@ source ./bin/activate
 pip3 install -r requirements.txt
 cd ..
 
-if [ $1 = "dev" ]; then
+if [ setup_type  = "dev" ]; then
     cd apps
     export FLASK_ENV=development
     python3 flask-frontend.py

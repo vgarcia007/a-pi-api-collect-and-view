@@ -47,5 +47,18 @@
         </a>
     </div>
     {% endfor %}
+
+    {% for item in data.wde1 %}
+    <div class="col-md-3 col-link">
+        <a href="/chart/{{device_name}}/{{item.name}}" >
+        <div class="card-counter primary">
+            <i class="fa fa-code-fork"></i>
+            <span class="count-numbers">{{ item.value }}°C</span>
+            <span class="count-name">{{ item.name }}</span>
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+
 </div>
 {% endblock %}

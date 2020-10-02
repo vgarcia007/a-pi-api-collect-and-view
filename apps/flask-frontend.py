@@ -92,6 +92,25 @@ def pi(pi):
 
                         db_data.append(latest_data)
 
+            if 'serial' in info:
+                if 'wde1' in info['serial']:
+                    latest_data['wde1'] = []
+
+                    for item in info['serial']['wde1']:
+                        name = 'wde1-' + item
+                        item_data = {}
+                        item_data['name'] = name
+                        print(name)
+                        sql = ''' SELECT data, recorded FROM records WHERE hostname = ? AND name = ? ORDER BY recorded DESC  LIMIT 1'''
+                        c.execute(sql, (info['hostname'],name,))
+                        item_db = c.fetchall()[0]
+                        item_data['name'] = name
+                        item_data['value'] = item_db[0]
+                        item_data['recorded'] = item_db[1]
+                        latest_data['wde1'].append(item_data)
+
+                        db_data.append(latest_data)
+
     if len(pi_ip) == 0:
         return render_template('error.html', text='device not in list')
 

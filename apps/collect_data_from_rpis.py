@@ -63,6 +63,23 @@ if __name__ == '__main__':
                             '/one-wire/ds1820/' + item
                             )
 
+            if 'serial' not in info:
+                print('no serial sensors attached')
+            else:
+                if 'wde1' in info['serial']:
+
+                    serial_wde1 = info['serial']['wde1']
+                    print(str(len(serial_wde1)) + ' serial_wde1 sensors attached')
+
+                    for item in serial_wde1:
+                        get_and_save_value_from_api(
+                            conn,
+                            info['hostname'],
+                            device['ip'],
+                            'wde1-' + item,
+                            item,
+                            '/serial/wde1/' + item
+                            )
 
         time.sleep(1800)
         

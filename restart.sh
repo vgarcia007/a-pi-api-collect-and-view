@@ -1,0 +1,2 @@
+systemctl restart a_pi_api_frontend
+systemctl restart a_pi_api_collector
